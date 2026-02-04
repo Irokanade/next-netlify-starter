@@ -1,0 +1,60 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What's the sweetest memory we've made together?",
+      "answers": [
+        "That time we laughed until we cried",
+        "Our first date",
+        "All our quiet moments together",
+        "Every single moment with you"
+      ],
+      "correctAnswer": 3,
+      "hint": "They're all sweet, but which one includes everything?"
+    },
+    {
+      "id": 2,
+      "question": "What makes us the perfect pair?",
+      "answers": [
+        "We complete each other's sentences",
+        "We make each other laugh",
+        "We support each other's dreams",
+        "All of the above and more!"
+      ],
+      "correctAnswer": 3,
+      "hint": "Why choose one when you can have it all?"
+    },
+    {
+      "id": 3,
+      "question": "What's the best gift I could give you?",
+      "answers": [
+        "Chocolates and flowers",
+        "A romantic dinner",
+        "Your favorite things",
+        "Just being with you is enough"
+      ],
+      "correctAnswer": 3,
+      "hint": "The best gifts aren't things..."
+    },
+    {
+      "id": 4,
+      "question": "Will you be my Valentine?",
+      "answers": ["Yes! Forever and always", "No"],
+      "correctAnswer": 0,
+      "isValentineQuestion": true,
+      "specialPoints": 100
+    }
+  ],
+  "settings": {
+    "pointsPerCorrect": 10,
+    "valentineQuestionPoints": 100,
+    "timePerQuestion": 0,
+    "showHints": true
+  },
+  "messages": {
+    "perfectScore": "You're purr-fect! Will you be mine forever?",
+    "goodScore": "We're meant to be! 💕",
+    "averageScore": "Let's make more memories together!",
+    "lowScore": "We should go on more dates! 🥺"
+  }
+}
