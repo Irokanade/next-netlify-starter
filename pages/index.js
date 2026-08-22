@@ -4,8 +4,12 @@ import IntroHeader from '@components/IntroHeader'
 import CategoryFilter from '@components/CategoryFilter'
 import Sidebar from '@components/Sidebar'
 import MapView from '@components/MapView'
-import places from '@data/places'
+import { getData, buildCategoryMap, resolveMapView } from '@lib/api'
 import styles from '@styles/Map.module.css'
+
+const { categories, places, config } = getData()
+const categoryMap = buildCategoryMap(categories)
+const { center: defaultCenter, zoom: defaultZoom } = resolveMapView(config, places)
 
 export default function Home() {
   const [activeCategories, setActiveCategories] = useState(() => new Set())
@@ -53,6 +57,7 @@ export default function Home() {
         <IntroHeader />
         <div className={styles.filters}>
           <CategoryFilter
+            categories={categories}
             active={activeCategories}
             onToggle={toggleCategory}
             onClear={clearFilters}
@@ -61,13 +66,19 @@ export default function Home() {
         <div className={styles.grid}>
           <Sidebar
             places={visiblePlaces}
+            categoryMap={categoryMap}
             selectedPoiId={selectedPoiId}
             onSelect={setSelectedPoiId}
           />
           <MapView
             places={visiblePlaces}
+            categoryMap={categoryMap}
             selectedPoiId={selectedPoiId}
             onSelect={setSelectedPoiId}
+            defaultCenter={defaultCenter}
+            defaultZoom={defaultZoom}
+            defaultPoiId={config.map.defaultPoiId}
+            openDefaultOnLoad={config.map.openDefaultOnLoad}
           />
         </div>
       </main>

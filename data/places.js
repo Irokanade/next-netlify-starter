@@ -1,9 +1,8 @@
 /**
- * @typedef {'libraries' | 'campus' | 'parks' | 'landmarks' | 'museums' | 'eats'} Category
  * @typedef {{
  *   id: string,
  *   name: string,
- *   category: Category,
+ *   category: string,          // must match a category id in data/categories.js
  *   coords: [number, number],
  *   address: string,
  *   image: string | null,
@@ -11,15 +10,6 @@
  *   url?: string
  * }} Poi
  */
-
-export const CATEGORIES = [
-  { id: 'libraries', label: 'Libraries' },
-  { id: 'campus',    label: 'Campus' },
-  { id: 'parks',     label: 'Parks' },
-  { id: 'landmarks', label: 'Landmarks' },
-  { id: 'museums',   label: 'Museums' },
-  { id: 'eats',      label: 'Eats' },
-]
 
 const IMG = (id) =>
   `https://images.unsplash.com/photo-${id}?w=600&auto=format&fit=crop&q=70`

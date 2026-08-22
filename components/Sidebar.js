@@ -1,7 +1,8 @@
+import CategoryChip from './CategoryChip'
 import { fallbackFor, handleImgError } from './imgFallback'
 import styles from './Sidebar.module.css'
 
-export default function Sidebar({ places, selectedPoiId, onSelect }) {
+export default function Sidebar({ places, categoryMap, selectedPoiId, onSelect }) {
   return (
     <aside className={styles.sidebar} aria-label="List of places">
       <div className={styles.header}>
@@ -13,9 +14,10 @@ export default function Sidebar({ places, selectedPoiId, onSelect }) {
           <li className={styles.empty}>No places match the current filter.</li>
         )}
         {places.map((p) => {
+          const category = categoryMap[p.category]
           const src = p.image
             ? p.image.replace('w=600', 'w=200')
-            : fallbackFor(p.category)
+            : fallbackFor(category)
           return (
             <li key={p.id}>
               <button
@@ -28,10 +30,10 @@ export default function Sidebar({ places, selectedPoiId, onSelect }) {
                   src={src}
                   alt=""
                   loading="lazy"
-                  onError={handleImgError(p.category)}
+                  onError={handleImgError(category)}
                 />
                 <div className={styles.body}>
-                  <span className={`chip chip--${p.category}`}>{p.category}</span>
+                  <CategoryChip category={category} />
                   <div className={styles.name}>{p.name}</div>
                   <div className={styles.desc}>{p.description}</div>
                 </div>

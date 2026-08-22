@@ -1,7 +1,6 @@
-import { CATEGORIES } from '@data/places'
 import styles from './CategoryFilter.module.css'
 
-export default function CategoryFilter({ active, onToggle, onClear }) {
+export default function CategoryFilter({ categories, active, onToggle, onClear }) {
   const showingAll = active.size === 0
   return (
     <div className={styles.row} role="group" aria-label="Filter places by category">
@@ -9,11 +8,11 @@ export default function CategoryFilter({ active, onToggle, onClear }) {
         type="button"
         aria-pressed={showingAll}
         onClick={onClear}
-        className={`${styles.chip} ${styles.all} ${showingAll ? styles.on : styles.off}`}
+        className={`${styles.chip} ${showingAll ? styles.on : styles.off}`}
       >
         All
       </button>
-      {CATEGORIES.map((c) => {
+      {categories.map((c) => {
         const isOn = active.has(c.id)
         return (
           <button
@@ -21,7 +20,8 @@ export default function CategoryFilter({ active, onToggle, onClear }) {
             type="button"
             aria-pressed={isOn}
             onClick={() => onToggle(c.id)}
-            className={`${styles.chip} ${styles[c.id]} ${isOn ? styles.on : styles.off}`}
+            className={`${styles.chip} ${isOn ? styles.on : styles.off}`}
+            style={isOn ? { background: c.color, borderColor: 'transparent' } : undefined}
           >
             {c.label}
           </button>

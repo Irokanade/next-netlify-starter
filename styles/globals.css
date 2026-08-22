@@ -51,7 +51,8 @@ img {
   max-width: 100%;
 }
 
-/* ---------- Pastel category chips (shared) ---------- */
+/* ---------- Pastel category chips (shared) ----------
+   Background color is set inline from category.color — no per-category class. */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -64,12 +65,6 @@ img {
   text-transform: uppercase;
   color: var(--ink);
 }
-.chip--libraries { background: var(--pastel-pink); }
-.chip--campus    { background: var(--pastel-mint); }
-.chip--parks     { background: var(--pastel-sage); }
-.chip--landmarks { background: var(--pastel-peach); }
-.chip--museums   { background: var(--pastel-lilac); }
-.chip--eats      { background: var(--pastel-yellow); }
 
 /* ---------- Leaflet div-icon pins ---------- */
 .leaflet-div-icon.pastel-pin {

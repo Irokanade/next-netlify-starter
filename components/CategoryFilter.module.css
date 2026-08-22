@@ -18,12 +18,4 @@
 .chip:hover { transform: translateY(-1px); }
 
 .off { background: #fff; }
-.on  { box-shadow: var(--shadow-soft); border-color: transparent; }
-
-.all.on       { background: var(--pastel-cream); border: 2px solid var(--pastel-lilac); }
-.libraries.on { background: var(--pastel-pink); }
-.campus.on    { background: var(--pastel-mint); }
-.parks.on     { background: var(--pastel-sage); }
-.landmarks.on { background: var(--pastel-peach); }
-.museums.on   { background: var(--pastel-lilac); }
-.eats.on      { background: var(--pastel-yellow); }
+.on  { box-shadow: var(--shadow-soft); }

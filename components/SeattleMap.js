@@ -3,9 +3,6 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { makeIcon } from './icons'
 import PoiPopup from './PoiPopup'
 
-const SEATTLE_CENTER = [47.6205, -122.3493]
-const DEFAULT_ZOOM = 12
-
 function FlyToController({ selectedPoiId, places, markerRefs }) {
   const map = useMap()
   useEffect(() => {
@@ -21,13 +18,33 @@ function FlyToController({ selectedPoiId, places, markerRefs }) {
   return null
 }
 
-export default function SeattleMap({ places, selectedPoiId, onSelect }) {
+function OpenDefaultOnLoad({ enabled, defaultPoiId, markerRefs }) {
+  useEffect(() => {
+    if (!enabled || !defaultPoiId) return
+    const t = setTimeout(() => {
+      markerRefs.current[defaultPoiId]?.openPopup()
+    }, 400)
+    return () => clearTimeout(t)
+  }, [enabled, defaultPoiId, markerRefs])
+  return null
+}
+
+export default function SeattleMap({
+  places,
+  categoryMap,
+  selectedPoiId,
+  onSelect,
+  defaultCenter,
+  defaultZoom,
+  defaultPoiId,
+  openDefaultOnLoad,
+}) {
   const markerRefs = useRef({})
 
   return (
     <MapContainer
-      center={SEATTLE_CENTER}
-      zoom={DEFAULT_ZOOM}
+      center={defaultCenter}
+      zoom={defaultZoom}
       scrollWheelZoom
       style={{ height: '100%', width: '100%' }}
     >
@@ -37,28 +54,36 @@ export default function SeattleMap({ places, selectedPoiId, onSelect }) {
         subdomains="abcd"
         maxZoom={20}
       />
-      {places.map((p) => (
-        <Marker
-          key={p.id}
-          position={p.coords}
-          icon={makeIcon(p.category)}
-          ref={(el) => {
-            if (el) markerRefs.current[p.id] = el
-            else delete markerRefs.current[p.id]
-          }}
-          eventHandlers={{
-            popupopen: () => onSelect?.(p.id),
-            popupclose: () => onSelect?.(null),
-          }}
-        >
-          <Popup>
-            <PoiPopup place={p} />
-          </Popup>
-        </Marker>
-      ))}
+      {places.map((p) => {
+        const category = categoryMap[p.category]
+        return (
+          <Marker
+            key={p.id}
+            position={p.coords}
+            icon={makeIcon(category)}
+            ref={(el) => {
+              if (el) markerRefs.current[p.id] = el
+              else delete markerRefs.current[p.id]
+            }}
+            eventHandlers={{
+              popupopen: () => onSelect?.(p.id),
+              popupclose: () => onSelect?.(null),
+            }}
+          >
+            <Popup>
+              <PoiPopup place={p} category={category} />
+            </Popup>
+          </Marker>
+        )
+      })}
       <FlyToController
         selectedPoiId={selectedPoiId}
         places={places}
+        markerRefs={markerRefs}
+      />
+      <OpenDefaultOnLoad
+        enabled={openDefaultOnLoad}
+        defaultPoiId={defaultPoiId}
         markerRefs={markerRefs}
       />
     </MapContainer>
