@@ -1,36 +1,179 @@
-html,
-body {
-  background-color: #f8fafc;
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+:root {
+  --pastel-pink: #ffd5e0;
+  --pastel-mint: #cdead2;
+  --pastel-sage: #b8d8b8;
+  --pastel-peach: #ffe0c2;
+  --pastel-lilac: #e4d4f4;
+  --pastel-yellow: #fff2b8;
+  --pastel-cream: #fff7ec;
+  --pastel-sky: #d6ecff;
+  --ink: #4a3a52;
+  --ink-soft: #806b8a;
+  --shadow-soft: 0 4px 14px rgba(74, 58, 82, 0.12);
+  --shadow-pop: 0 8px 22px rgba(74, 58, 82, 0.18);
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+body {
+  font-family: 'Quicksand', 'Nunito', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--pastel-cream);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+a {
+  color: var(--ink);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- Pastel category chips (shared) ---------- */
+.chip {
+  display: inline-flex;
   align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
 }
+.chip--libraries { background: var(--pastel-pink); }
+.chip--campus    { background: var(--pastel-mint); }
+.chip--parks     { background: var(--pastel-sage); }
+.chip--landmarks { background: var(--pastel-peach); }
+.chip--museums   { background: var(--pastel-lilac); }
+.chip--eats      { background: var(--pastel-yellow); }
 
-code {
-  background: #e2e8f0;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-family: Menlo, Monaco, Lucida Console, Courier New, monospace;
+/* ---------- Leaflet div-icon pins ---------- */
+.leaflet-div-icon.pastel-pin {
+  background: transparent;
+  border: 0;
 }
-
-.container {
-  height: 100vh;
+.pin-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: var(--shadow-pop);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  transition: transform 0.15s ease-out;
+}
+.pin-wrap > svg {
+  transform: rotate(45deg);
+}
+.leaflet-marker-icon:hover .pin-wrap {
+  transform: rotate(-45deg) scale(1.08);
+}
+
+/* ---------- Leaflet popup overrides ---------- */
+.leaflet-popup-content-wrapper {
+  background: var(--pastel-cream);
+  border-radius: 18px;
+  box-shadow: var(--shadow-pop);
+  padding: 0;
+  border: 2px solid var(--pastel-lilac);
+}
+.leaflet-popup-content {
+  margin: 0;
+  width: 260px !important;
+}
+.leaflet-popup-tip {
+  background: var(--pastel-cream);
+  border-right: 2px solid var(--pastel-lilac);
+  border-bottom: 2px solid var(--pastel-lilac);
+}
+.leaflet-container {
+  background: var(--pastel-sky);
+  font-family: inherit;
+}
+.leaflet-control-attribution {
+  background: rgba(255, 247, 236, 0.85) !important;
+  color: var(--ink-soft) !important;
+  font-size: 0.68rem !important;
+  border-radius: 8px 0 0 0;
+}
+.leaflet-control-attribution a {
+  color: var(--ink) !important;
+}
+.leaflet-control-zoom a {
+  background: var(--pastel-cream) !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--pastel-lilac) !important;
+  border-radius: 10px !important;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--pastel-lilac) !important;
+}
+
+/* ---------- Popup card content ---------- */
+.poi-popup__img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  display: block;
+}
+.poi-popup__body {
+  padding: 0.7rem 0.9rem 0.9rem;
+}
+.poi-popup__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--ink);
+}
+.poi-popup__addr {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0.5rem;
+}
+.poi-popup__desc {
+  font-size: 0.82rem;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+.poi-popup__link {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--pastel-lilac);
+  color: var(--ink);
+}
+.poi-popup__link:hover {
+  filter: brightness(0.95);
 }

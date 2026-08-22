@@ -1,0 +1,29 @@
+.row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+  border: 2px solid var(--pastel-lilac);
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s;
+  color: var(--ink);
+}
+
+.chip:hover { transform: translateY(-1px); }
+
+.off { background: #fff; }
+.on  { box-shadow: var(--shadow-soft); border-color: transparent; }
+
+.all.on       { background: var(--pastel-cream); border: 2px solid var(--pastel-lilac); }
+.libraries.on { background: var(--pastel-pink); }
+.campus.on    { background: var(--pastel-mint); }
+.parks.on     { background: var(--pastel-sage); }
+.landmarks.on { background: var(--pastel-peach); }
+.museums.on   { background: var(--pastel-lilac); }
+.eats.on      { background: var(--pastel-yellow); }

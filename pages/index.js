@@ -1,70 +1,76 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
-import QuizContainer from '@components/QuizContainer'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import { useEffect, useMemo, useState } from 'react'
+import IntroHeader from '@components/IntroHeader'
+import CategoryFilter from '@components/CategoryFilter'
+import Sidebar from '@components/Sidebar'
+import MapView from '@components/MapView'
+import places from '@data/places'
+import styles from '@styles/Map.module.css'
 
 export default function Home() {
-  const [quizData, setQuizData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [activeCategories, setActiveCategories] = useState(() => new Set())
+  const [selectedPoiId, setSelectedPoiId] = useState(null)
+
+  const visiblePlaces = useMemo(
+    () =>
+      activeCategories.size === 0
+        ? places
+        : places.filter((p) => activeCategories.has(p.category)),
+    [activeCategories],
+  )
 
   useEffect(() => {
-    // Fetch quiz data from JSON file
-    fetch('/data/quizData.json')
-      .then(res => res.json())
-      .then(data => {
-        setQuizData(data)
-        setLoading(false)
-        console.log(data)
-      })
-      .catch(err => {
-        console.error('Error loading quiz data:', err)
-        setLoading(false)
-      })
-  }, [])
+    if (!selectedPoiId) return
+    if (!visiblePlaces.some((p) => p.id === selectedPoiId)) {
+      setSelectedPoiId(null)
+    }
+  }, [visiblePlaces, selectedPoiId])
+
+  const toggleCategory = (id) => {
+    setActiveCategories((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const clearFilters = () => setActiveCategories(new Set())
 
   return (
-    <div className="container">
+    <>
       <Head>
-        <title>Will You Be My Valentine? ❤️</title>
+        <title>My Seattle Guide</title>
+        <meta
+          name="description"
+          content="A cute pastel map of Seattle spots — libraries, Northeastern campus, parks, landmarks, museums, and eats."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Header title="Valentine's Day Quiz ❤️" />
-        
-        {loading ? (
-          <div className="loading">
-            <p>Loading quiz... 🐱</p>
-          </div>
-        ) : quizData ? (
-          <QuizContainer quizData={quizData} />
-        ) : (
-          <div className="error">
-            <p>Failed to load quiz. Please refresh! 🐾</p>
-          </div>
-        )}
+      <main className={styles.page}>
+        <IntroHeader />
+        <div className={styles.filters}>
+          <CategoryFilter
+            active={activeCategories}
+            onToggle={toggleCategory}
+            onClear={clearFilters}
+          />
+        </div>
+        <div className={styles.grid}>
+          <Sidebar
+            places={visiblePlaces}
+            selectedPoiId={selectedPoiId}
+            onSelect={setSelectedPoiId}
+          />
+          <MapView
+            places={visiblePlaces}
+            selectedPoiId={selectedPoiId}
+            onSelect={setSelectedPoiId}
+          />
+        </div>
       </main>
-
-      <Footer />
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-        }
-        .loading, .error {
-          text-align: center;
-          padding: 2rem;
-          font-size: 1.5rem;
-          color: #d63384;
-        }
-      `}</style>
-    </div>
+    </>
   )
 }
