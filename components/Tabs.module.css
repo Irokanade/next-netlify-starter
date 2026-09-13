@@ -1,0 +1,43 @@
+.row {
+  display: inline-flex;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid var(--pastel-lilac);
+  box-shadow: var(--shadow-soft);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: background 0.15s ease-out, color 0.15s ease-out;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  background: var(--pastel-cream);
+  color: var(--ink);
+}
+
+.on,
+.on:hover {
+  background: var(--pastel-lilac);
+  color: var(--ink);
+}
+
+.badge {
+  min-width: 1.3rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: rgba(74, 58, 82, 0.12);
+  font-size: 0.7rem;
+  line-height: 1.3rem;
+  text-align: center;
+}

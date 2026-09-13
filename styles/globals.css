@@ -111,6 +111,11 @@ img {
   background: var(--pastel-sky);
   font-family: inherit;
 }
+/* Pull the raw OSM tiles back toward the pastel palette. Applied to the tile
+   pane only, so pins, popups and controls keep their real colours. */
+.leaflet-tile-pane {
+  filter: saturate(0.68) brightness(1.06) contrast(0.94);
+}
 .leaflet-control-attribution {
   background: rgba(255, 247, 236, 0.85) !important;
   color: var(--ink-soft) !important;
@@ -171,4 +176,22 @@ img {
 }
 .poi-popup__link:hover {
   filter: brightness(0.95);
+}
+.poi-popup__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.poi-popup__edit {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--pastel-lilac);
+  color: var(--ink);
+}
+.poi-popup__edit:hover {
+  background: var(--pastel-cream);
 }

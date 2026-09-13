@@ -1,0 +1,735 @@
+/* ------------------------------------------------------------- shell */
+
+.planner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+  border: 2px solid var(--pastel-lilac);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.toolbarSpacer {
+  flex: 1;
+}
+
+.tripTitle {
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--ink);
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0.25rem 0.5rem;
+  min-width: 12ch;
+  max-width: 26ch;
+}
+
+.tripTitle:hover {
+  border-color: var(--pastel-cream);
+  background: var(--pastel-cream);
+}
+
+.tripTitle:focus {
+  outline: none;
+  border-color: var(--pastel-lilac);
+  background: #fff;
+}
+
+.tripStat {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.toolBtn {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--pastel-cream);
+  border: 2px solid var(--pastel-lilac);
+}
+
+.toolBtn:hover {
+  background: var(--pastel-lilac);
+}
+
+.savedNote {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  padding: 0 0.35rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ----------------------------------------------------------- palette */
+
+.palette {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.85rem;
+  background: #fff;
+  border: 2px solid var(--pastel-lilac);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  /* Stays put while the board scrolls, so the list never ends up half-hidden
+     below the fold. */
+  position: sticky;
+  top: 0.75rem;
+  align-self: start;
+  max-height: calc(100vh - 1.5rem);
+}
+
+.paletteHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.paletteHeading {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.paletteFilters {
+  transform: scale(0.9);
+  transform-origin: left center;
+  margin-right: -10%;
+}
+
+.paletteList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+  margin: 0 -0.2rem 0 0;
+  flex: 1;
+}
+
+.paletteItem {
+  display: flex;
+  align-items: stretch;
+  gap: 0.3rem;
+  border-radius: 14px;
+  border: 2px solid var(--pastel-cream);
+  background: var(--pastel-cream);
+  transition: border-color 0.15s ease-out, transform 0.1s ease-out;
+}
+
+.paletteItem:hover {
+  border-color: var(--card-tint, var(--pastel-lilac));
+  transform: translateY(-1px);
+}
+
+.paletteItemDragging {
+  opacity: 0.35;
+}
+
+.paletteGrab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  flex: 1;
+  min-width: 0;
+  cursor: grab;
+  touch-action: manipulation;
+  text-align: left;
+  border-radius: 12px;
+}
+
+.paletteGrab:active {
+  cursor: grabbing;
+}
+
+.paletteThumb {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.paletteBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.paletteName {
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.paletteAdd {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-left: auto;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  color: var(--ink-soft);
+  background: #fff;
+}
+
+.paletteItem:hover .paletteAdd {
+  background: var(--card-tint, var(--pastel-lilac));
+  color: var(--ink);
+}
+
+.newCardBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.5rem 0.75rem;
+  border-radius: 14px;
+  border: 2px dashed var(--pastel-lilac);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.newCardBtn:hover {
+  background: var(--pastel-cream);
+  border-style: solid;
+}
+
+.newCardHint {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* -------------------------------------------------------------- board */
+
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  overflow-x: auto;
+  padding: 0.2rem 0.2rem 0.8rem;
+  min-height: 0;
+}
+
+.day {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.7rem;
+  background: #fff;
+  border: 2px solid var(--pastel-lilac);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  max-height: 78vh;
+  transition: border-color 0.15s ease-out, background 0.15s ease-out;
+}
+
+.dayOver {
+  border-color: var(--pastel-sage);
+  background: #fbfffb;
+}
+
+.dayHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.dayTitles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.dayTitle,
+.daySubtitle {
+  font: inherit;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 0.1rem 0.35rem;
+  color: var(--ink);
+  width: 100%;
+}
+
+.dayTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.daySubtitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.dayTitle:hover,
+.daySubtitle:hover {
+  background: var(--pastel-cream);
+}
+
+.dayTitle:focus,
+.daySubtitle:focus {
+  outline: none;
+  border-color: var(--pastel-lilac);
+  background: #fff;
+}
+
+.dayTools {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex-shrink: 0;
+}
+
+.dayCount {
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: var(--pastel-cream);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.4rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.cardList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  overflow-y: auto;
+  min-height: 84px;
+  padding: 0.1rem;
+  margin: 0 -0.1rem;
+  flex: 1;
+}
+
+.dayEmpty {
+  padding: 1rem 0.75rem;
+  border-radius: 16px;
+  border: 2px dashed var(--pastel-lilac);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* Drop indicator. Drawn as an overlay on the neighbouring card so nothing
+   in the list moves while you're aiming at it. */
+.dropBefore,
+.dropAfter {
+  position: relative;
+}
+
+.dropBefore::before,
+.dropAfter::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--pastel-sage);
+  box-shadow: 0 0 0 3px rgba(184, 216, 184, 0.35);
+}
+
+.dropBefore::before {
+  top: -5px;
+}
+
+.dropAfter::after {
+  bottom: -5px;
+}
+
+.dayEmptyOver {
+  border-style: solid;
+  border-color: var(--pastel-sage);
+  background: rgba(184, 216, 184, 0.18);
+  color: var(--ink);
+}
+
+.addCardBtn {
+  padding: 0.4rem;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  border: 2px dashed transparent;
+}
+
+.addCardBtn:hover {
+  color: var(--ink);
+  border-color: var(--pastel-lilac);
+  background: var(--pastel-cream);
+}
+
+.addDayColumn {
+  flex: 0 0 140px;
+  align-self: flex-start;
+  padding: 1.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  border-radius: 22px;
+  border: 2px dashed var(--pastel-lilac);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.addDayColumn span {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.addDayColumn:hover {
+  background: #fff;
+  color: var(--ink);
+}
+
+/* -------------------------------------------------------------- cards */
+
+.cardSlot {
+  list-style: none;
+  position: relative;
+}
+
+.card {
+  border-radius: 16px;
+  border: 2px solid var(--pastel-cream);
+  background: var(--pastel-cream);
+  overflow: hidden;
+  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.card:hover {
+  border-color: var(--card-tint, var(--pastel-lilac));
+}
+
+.cardDragging {
+  opacity: 0.32;
+}
+
+.cardOverlay {
+  width: 286px;
+  border-color: var(--card-tint, var(--pastel-lilac));
+  box-shadow: var(--shadow-pop);
+  transform: rotate(-2deg) scale(1.02);
+  cursor: grabbing;
+}
+
+.cardMissing {
+  opacity: 0.7;
+  border-style: dashed;
+}
+
+.cardMain {
+  display: flex;
+  align-items: stretch;
+  gap: 0.45rem;
+  padding: 0.4rem;
+}
+
+.grip {
+  display: flex;
+  background: transparent;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 20px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  cursor: grab;
+  touch-action: manipulation;
+  color: var(--ink-soft);
+}
+
+.grip:active {
+  cursor: grabbing;
+}
+
+.grip:hover {
+  background: rgba(74, 58, 82, 0.06);
+}
+
+/* Six dots — the "pick me up" affordance. */
+.gripDots {
+  width: 8px;
+  height: 14px;
+  background-image: radial-gradient(currentColor 1.1px, transparent 1.2px);
+  background-size: 4px 4px;
+  opacity: 0.55;
+}
+
+.order {
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.thumb {
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--card-tint, var(--pastel-cream));
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.time,
+.pinBadge {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  background: #fff;
+  border: 1px solid var(--pastel-lilac);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.cardName {
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.cardNote {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0 0.4rem 0.35rem 2.4rem;
+}
+
+.iconBtn {
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  border: 1px solid transparent;
+}
+
+.iconBtn:hover:not(:disabled) {
+  background: #fff;
+  border-color: var(--pastel-lilac);
+  color: var(--ink);
+}
+
+.iconBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.danger:hover:not(:disabled) {
+  background: var(--pastel-pink);
+  border-color: var(--pastel-pink);
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------- editor */
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.6rem;
+  background: #fff;
+  border-top: 2px dashed var(--pastel-lilac);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  min-width: 0;
+}
+
+/* Only share space when laid out side by side — as a child of the column-flex
+   palette, growing would stretch the control down the whole panel. */
+.fieldRow .field,
+.moveRow .field {
+  flex: 1;
+}
+
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  border: 2px solid var(--pastel-lilac);
+  background: var(--pastel-cream);
+  width: 100%;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--ink-soft);
+  background: #fff;
+}
+
+.fieldRow {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.hint {
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+}
+
+.moveRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.nudge {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.nudge .iconBtn {
+  border-color: var(--pastel-lilac);
+  padding: 0.28rem 0.5rem;
+}
+
+.doneBtn {
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--pastel-lilac);
+  color: var(--ink);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .palette {
+    /* Single column here — pinning it would park the list on top of the board. */
+    position: static;
+    max-height: 42vh;
+  }
+  .day {
+    flex-basis: 82vw;
+    max-height: none;
+  }
+  .cardList {
+    overflow-y: visible;
+  }
+}
+
+.pinNote {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 0.55rem;
+  border-radius: 12px;
+  background: var(--pastel-cream);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.pinCoords {
+  font-weight: 700;
+  color: var(--ink);
+}

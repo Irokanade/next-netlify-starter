@@ -1,5 +1,12 @@
 import { useEffect, useRef } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMap,
+  useMapEvents,
+} from 'react-leaflet'
 import { makeIcon } from './icons'
 import PoiPopup from './PoiPopup'
 
@@ -29,6 +36,25 @@ function OpenDefaultOnLoad({ enabled, defaultPoiId, markerRefs }) {
   return null
 }
 
+/** Turns a click on the map into a dropped pin while add-mode is armed. */
+function ClickToDropPin({ enabled, onDrop }) {
+  const map = useMap()
+  useMapEvents({
+    click(e) {
+      if (!enabled) return
+      onDrop([e.latlng.lat, e.latlng.lng])
+    },
+  })
+  useEffect(() => {
+    const el = map.getContainer()
+    el.style.cursor = enabled ? 'crosshair' : ''
+    return () => {
+      el.style.cursor = ''
+    }
+  }, [enabled, map])
+  return null
+}
+
 export default function SeattleMap({
   places,
   categoryMap,
@@ -38,8 +64,15 @@ export default function SeattleMap({
   defaultZoom,
   defaultPoiId,
   openDefaultOnLoad,
+  addMode,
+  draft,
+  onDropPin,
+  onMoveDraft,
+  onEditPlace,
+  onMovePlace,
 }) {
   const markerRefs = useRef({})
+  const draftCategory = draft ? categoryMap[draft.place.category] : null
 
   return (
     <MapContainer
@@ -48,19 +81,29 @@ export default function SeattleMap({
       scrollWheelZoom
       style={{ height: '100%', width: '100%' }}
     >
+      {/* Plain OSM tiles: CARTO now burns an "API KEY REQUIRED" watermark into
+          unkeyed tiles. These run a little louder than the pastel palette, so
+          .leaflet-tile-pane softens them in globals.css. */}
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-        subdomains="abcd"
-        maxZoom={20}
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        maxZoom={19}
       />
       {places.map((p) => {
         const category = categoryMap[p.category]
+        // Your own pins can be nudged into place, but only while add-mode is on
+        // or you're editing that pin — otherwise an ordinary click-and-drag on
+        // the map would move them.
+        const editingThis = draft?.mode === 'edit' && draft.place.id === p.id
+        const draggable = Boolean(p.custom && (addMode || editingThis))
         return (
           <Marker
             key={p.id}
-            position={p.coords}
-            icon={makeIcon(category)}
+            // While editing, follow the draft so a drag previews live and
+            // Cancel snaps the pin back to where it was saved.
+            position={editingThis ? draft.place.coords : p.coords}
+            icon={makeIcon(editingThis ? categoryMap[draft.place.category] : category)}
+            draggable={draggable}
             ref={(el) => {
               if (el) markerRefs.current[p.id] = el
               else delete markerRefs.current[p.id]
@@ -68,14 +111,40 @@ export default function SeattleMap({
             eventHandlers={{
               popupopen: () => onSelect?.(p.id),
               popupclose: () => onSelect?.(null),
+              dragend: (e) => {
+                if (!draggable) return
+                const { lat, lng } = e.target.getLatLng()
+                if (editingThis) onMoveDraft?.([lat, lng])
+                else onMovePlace?.(p.id, [lat, lng])
+              },
             }}
           >
             <Popup>
-              <PoiPopup place={p} category={category} />
+              <PoiPopup
+                place={p}
+                category={category}
+                onEdit={p.custom ? () => onEditPlace?.(p) : undefined}
+              />
             </Popup>
           </Marker>
         )
       })}
+
+      {draft?.mode === 'create' && (
+        <Marker
+          position={draft.place.coords}
+          icon={makeIcon(draftCategory)}
+          draggable
+          eventHandlers={{
+            dragend: (e) => {
+              const { lat, lng } = e.target.getLatLng()
+              onMoveDraft?.([lat, lng])
+            },
+          }}
+        />
+      )}
+
+      <ClickToDropPin enabled={addMode && !draft} onDrop={onDropPin} />
       <FlyToController
         selectedPoiId={selectedPoiId}
         places={places}
