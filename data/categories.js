@@ -49,6 +49,20 @@ const categories = [
     glyph:
       '<path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>',
   },
+  {
+    id: 'coffee',
+    label: 'Coffee',
+    color: '#e8d5c4',
+    glyph:
+      '<path d="M4 3h13v5h2a3 3 0 0 1 0 6h-2v1a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V3zm13 7v2h2a1 1 0 0 0 0-2h-2zM3 21h15v2H3v-2z"/>',
+  },
+  {
+    id: 'shopping',
+    label: 'Shopping',
+    color: '#cfe3f5',
+    glyph:
+      '<path d="M9 6a3 3 0 0 1 6 0v1h4l1 14H4L5 7h4V6zm2 0v1h2V6a1 1 0 0 0-2 0zM8 10v2h2v-2H8zm6 0v2h2v-2h-2z"/>',
+  },
 ]
 
 export default categories

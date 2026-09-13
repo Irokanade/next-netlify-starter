@@ -51,6 +51,18 @@ const places = [
     url: 'https://www.spl.org/hours-and-locations/capitol-hill-branch',
   },
 
+  {
+    id: 'suzzallo-library',
+    name: 'Suzzallo & Allen Libraries',
+    category: 'libraries',
+    coords: [47.6560, -122.3080],
+    address: '4000 15th Ave NE, Seattle, WA 98195',
+    image: null,
+    description:
+      'UW’s cathedral of a reading room — vaulted Gothic ceilings and stained glass. The Hogwarts comparison writes itself.',
+    url: 'https://www.lib.washington.edu/suzzallo',
+  },
+
   // ---------- Campus ----------
   {
     id: 'northeastern-seattle',
@@ -61,6 +73,51 @@ const places = [
     image: IMG('1562774053-701939374585'),
     description: "My new campus in South Lake Union — the reason I'm here.",
     url: 'https://seattle.northeastern.edu/',
+  },
+
+  {
+    id: 'uw-seattle',
+    name: 'University of Washington',
+    category: 'campus',
+    coords: [47.6553, -122.3035],
+    address: '1410 NE Campus Pkwy, Seattle, WA 98195',
+    image: null,
+    description:
+      'The big one across the bridge — Gothic quads, cherry trees, and a campus worth a whole afternoon.',
+    url: 'https://www.washington.edu/visit/',
+  },
+  {
+    id: 'uw-red-square',
+    name: 'Red Square (UW)',
+    category: 'campus',
+    coords: [47.6557, -122.3090],
+    address: 'Red Square, University of Washington, Seattle, WA 98195',
+    image: null,
+    description:
+      'Brick-paved heart of campus, flanked by Suzzallo. Windy, wide open, always something going on.',
+    url: 'https://www.washington.edu/maps/#!/red%20square',
+  },
+  {
+    id: 'uw-quad',
+    name: 'The Quad (UW)',
+    category: 'campus',
+    coords: [47.6570, -122.3077],
+    address: 'Liberal Arts Quadrangle, Seattle, WA 98195',
+    image: null,
+    description:
+      'Thirty Yoshino cherry trees that go off all at once in late March. Peak bloom lasts about ten days.',
+    url: 'https://www.washington.edu/cherryblossom/',
+  },
+  {
+    id: 'drumheller-fountain',
+    name: 'Drumheller Fountain',
+    category: 'campus',
+    coords: [47.6532, -122.3076],
+    address: 'Drumheller Fountain, Seattle, WA 98195',
+    image: null,
+    description:
+      'Frosh Pond at the base of Rainier Vista — on a clear day the mountain lines up perfectly behind it.',
+    url: 'https://www.washington.edu/maps/#!/drumheller',
   },
 
   // ---------- Parks ----------
@@ -135,6 +192,29 @@ const places = [
       'Capitol Hill lawn, weird water sculpture, always somebody with a picnic blanket.',
   },
 
+  {
+    id: 'waterfront-park',
+    name: 'Waterfront Park & Pier 58',
+    category: 'parks',
+    coords: [47.6065, -122.3419],
+    address: '1401 Alaskan Way, Seattle, WA 98101',
+    image: null,
+    description:
+      'Rebuilt pier deck with fountains and play space, looking straight out at Elliott Bay and the ferries.',
+    url: 'https://waterfrontparkseattle.org/',
+  },
+  {
+    id: 'woodland-park-zoo',
+    name: 'Woodland Park Zoo',
+    category: 'parks',
+    coords: [47.6685, -122.3515],
+    address: '5500 Phinney Ave N, Seattle, WA 98103',
+    image: null,
+    description:
+      '900-odd animals across African savanna, tropical rainforest, and Northwest habitats. Easy half-day.',
+    url: 'https://www.zoo.org/',
+  },
+
   // ---------- Landmarks ----------
   {
     id: 'space-needle',
@@ -190,6 +270,73 @@ const places = [
     url: 'https://www.smithtower.com/',
   },
 
+  {
+    id: 'seattle-great-wheel',
+    name: 'The Seattle Great Wheel',
+    category: 'landmarks',
+    coords: [47.6061, -122.3425],
+    address: '1301 Alaskan Way, Seattle, WA 98101',
+    image: null,
+    description:
+      '175-foot Ferris wheel hanging off the end of Pier 57. Three slow rotations, best at sunset.',
+    url: 'https://seattlegreatwheel.com/',
+  },
+  {
+    id: 'overlook-walk',
+    name: 'Overlook Walk',
+    category: 'landmarks',
+    coords: [47.6093, -122.3435],
+    address: 'Overlook Walk, Alaskan Way, Seattle, WA 98101',
+    image: null,
+    description:
+      'Elevated walkway stitching Pike Place down to the waterfront — no more hill, and the bay views are free.',
+    url: 'https://waterfrontseattle.org/waterfront-projects/overlook-walk',
+  },
+  {
+    id: 'amazon-spheres',
+    name: 'Amazon Spheres',
+    category: 'landmarks',
+    coords: [47.6155, -122.3393],
+    address: '2111 7th Ave, Seattle, WA 98121',
+    image: null,
+    description:
+      'Three glass domes packed with 40,000 cloud-forest plants. Public entry is limited — the Understory exhibit is the way in.',
+    url: 'https://www.seattlespheres.com/',
+  },
+  {
+    id: 'gum-wall',
+    name: 'The Gum Wall',
+    category: 'landmarks',
+    coords: [47.6086, -122.3411],
+    address: '1428 Post Alley, Seattle, WA 98101',
+    image: null,
+    description:
+      'A brick alley under Pike Place layered in decades of chewed gum. Gross, iconic, weirdly photogenic.',
+    url: 'https://pikeplacemarket.org/',
+  },
+  {
+    id: 't-mobile-park',
+    name: 'T-Mobile Park',
+    category: 'landmarks',
+    coords: [47.5914, -122.3325],
+    address: '1250 1st Ave S, Seattle, WA 98134',
+    image: null,
+    description:
+      'Mariners home field with a roof that covers but never seals. Ballpark tours run on non-game days.',
+    url: 'https://www.mlb.com/mariners/ballpark',
+  },
+  {
+    id: 'argosy-cruises',
+    name: 'Argosy Cruises — Pier 55',
+    category: 'landmarks',
+    coords: [47.6055, -122.3410],
+    address: '1101 Alaskan Way Pier 55, Seattle, WA 98101',
+    image: null,
+    description:
+      'Harbor tours and the Locks Cruise, which runs you up through Ballard Locks into the freshwater side.',
+    url: 'https://www.argosycruises.com/',
+  },
+
   // ---------- Museums ----------
   {
     id: 'chihuly-garden',
@@ -234,6 +381,18 @@ const places = [
     description:
       "On the waterfront — sea otters, a giant Pacific octopus, and salmon runs.",
     url: 'https://www.seattleaquarium.org/',
+  },
+
+  {
+    id: 'museum-of-flight',
+    name: 'The Museum of Flight',
+    category: 'museums',
+    coords: [47.5188, -122.2968],
+    address: '9404 E Marginal Way S, Seattle, WA 98108',
+    image: null,
+    description:
+      'Enormous aviation collection at Boeing Field — a Concorde, the old Air Force One, and an SR-71 out front.',
+    url: 'https://www.museumofflight.org/',
   },
 
   // ---------- Eats ----------
@@ -313,6 +472,120 @@ const places = [
     description:
       "Upstairs above the market — big windows onto the water, warm cinnamon rolls.",
     url: 'https://storyville.com/',
+  },
+  {
+    id: 'pike-place-chowder',
+    name: 'Pike Place Chowder',
+    category: 'eats',
+    coords: [47.6093, -122.3413],
+    address: '1530 Post Alley, Seattle, WA 98101',
+    image: null,
+    description:
+      'The chowder everyone queues for. Get the sampler if you can’t choose — the smoked salmon one is the sleeper.',
+    url: 'https://www.pikeplacechowder.com/',
+  },
+  {
+    id: 'the-pink-door',
+    name: 'The Pink Door',
+    category: 'eats',
+    coords: [47.6103, -122.3424],
+    address: '1919 Post Alley, Seattle, WA 98101',
+    image: null,
+    description:
+      'Unmarked pink door into an Italian dining room with trapeze acts over the tables. Book well ahead.',
+    url: 'https://thepinkdoor.net/',
+  },
+  {
+    id: 'the-athenian',
+    name: 'The Athenian Seafood Restaurant',
+    category: 'eats',
+    coords: [47.6091, -122.3410],
+    address: '1517 Pike Pl, Seattle, WA 98101',
+    image: null,
+    description:
+      'Market institution since 1909, and the booth where Tom Hanks sat in Sleepless in Seattle.',
+    url: 'https://athenianseattle.com/',
+  },
+  {
+    id: 'the-crab-pot',
+    name: 'The Crab Pot',
+    category: 'eats',
+    coords: [47.6058, -122.3423],
+    address: '1301 Alaskan Way Pier 57, Seattle, WA 98101',
+    image: null,
+    description:
+      'Seafeast dumped straight onto butcher paper. Bib on, mallet out, no cutlery involved.',
+    url: 'https://www.thecrabpotseattle.com/',
+  },
+  {
+    id: 'the-loupe-lounge',
+    name: 'The Loupe Lounge',
+    category: 'eats',
+    coords: [47.6205, -122.3493],
+    address: '400 Broad St, Seattle, WA 98109',
+    image: null,
+    description:
+      'Rotating glass floor inside the Space Needle — cocktails while the city turns underneath your feet.',
+    url: 'https://www.spaceneedle.com/loupe-lounge',
+  },
+
+  // ---------- Coffee ----------
+  {
+    id: 'starbucks-original',
+    name: 'Original Starbucks',
+    category: 'coffee',
+    coords: [47.6098, -122.3404],
+    address: '1912 Pike Pl, Seattle, WA 98101',
+    image: null,
+    description:
+      'The 1971 storefront with the old brown siren logo. The line is long and the coffee is normal Starbucks.',
+    url: 'https://www.starbucks.com/store-locator/store/10600/',
+  },
+  {
+    id: 'espresso-vivace',
+    name: 'Espresso Vivace',
+    category: 'coffee',
+    coords: [47.6240, -122.3211],
+    address: '532 Broadway E, Seattle, WA 98102',
+    image: null,
+    description:
+      'David Schomer’s shop — more or less where American latte art started. Order the Caffe Nico.',
+    url: 'https://espressovivace.com/',
+  },
+  {
+    id: 'seattle-coffee-works',
+    name: 'Seattle Coffee Works',
+    category: 'coffee',
+    coords: [47.6089, -122.3396],
+    address: '107 Pike St, Seattle, WA 98101',
+    image: null,
+    description:
+      'Slow-bar tasting room a block off the market. They’ll walk you through a side-by-side if you ask.',
+    url: 'https://seattlecoffeeworks.com/',
+  },
+  {
+    id: 'ghost-alley-espresso',
+    name: 'Ghost Alley Espresso',
+    category: 'coffee',
+    coords: [47.6088, -122.3413],
+    address: '1499 Post Alley, Seattle, WA 98101',
+    image: null,
+    description:
+      'Tiny haunted-themed window right by the Gum Wall. Good espresso, excellent people-watching.',
+    url: 'https://www.ghostalleyespresso.com/',
+  },
+
+  // ---------- Shopping ----------
+  {
+    id: 'university-village',
+    name: 'University Village',
+    category: 'shopping',
+    coords: [47.6629, -122.2991],
+    address: '2623 NE University Village St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Open-air mall next to UW — landscaped walkways, a good bookstore, and plenty of places to eat.',
+    url: 'https://uvillage.com/',
   },
 ]
 
