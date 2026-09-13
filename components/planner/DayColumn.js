@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'motion/react'
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import SortableCard from './TripCard'
@@ -93,6 +94,7 @@ export default function DayColumn({
 
       <SortableContext items={day.cards.map((c) => c.uid)} strategy={verticalListSortingStrategy}>
         <ul className={styles.cardList} ref={setNodeRef}>
+          <AnimatePresence initial={false}>
           {day.cards.length === 0 && (
             <li className={`${styles.dayEmpty} ${isOver ? styles.dayEmptyOver : ''}`}>
               Drag places here — or add a card for lunch, a nap, free &amp; easy…
@@ -158,6 +160,7 @@ export default function DayColumn({
               />
             )
           })}
+          </AnimatePresence>
         </ul>
       </SortableContext>
 

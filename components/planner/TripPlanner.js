@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from 'react'
+import { motion } from 'motion/react'
 import {
   DndContext,
   DragOverlay,
@@ -348,8 +349,17 @@ export default function TripPlanner({ trip, setTrip, places, categories, categor
         </div>
       </div>
 
-      <DragOverlay dropAnimation={{ duration: 180, easing: 'cubic-bezier(.2,.8,.3,1)' }}>
-        {overlay}
+      <DragOverlay dropAnimation={{ duration: 200, easing: 'cubic-bezier(.2,.8,.3,1)' }}>
+        {overlay && (
+          // A little lift and tilt so the card reads as picked up off the board.
+          <motion.div
+            initial={{ scale: 1, rotate: 0 }}
+            animate={{ scale: 1.03, rotate: -2 }}
+            transition={{ type: 'spring', stiffness: 520, damping: 30 }}
+          >
+            {overlay}
+          </motion.div>
+        )}
       </DragOverlay>
     </DndContext>
   )

@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import CategoryChip from '../CategoryChip'
@@ -11,15 +12,13 @@ export function cardTitle(card, poi) {
 }
 
 /**
- * The visual face of a card. Shared by the sortable list and the drag
- * overlay, so the thing under your cursor looks exactly like the thing you
- * picked up.
+ * The visual face of a card. Shared by the sortable list and the drag overlay,
+ * so the thing under your cursor looks exactly like the thing you picked up.
  */
 export function CardFace({
   card,
   poi,
   category,
-  index,
   dragging,
   overlay,
   dropHint,
@@ -45,24 +44,7 @@ export function CardFace({
         .join(' ')}
       style={{ '--card-tint': category.color }}
     >
-      <div className={styles.cardMain}>
-        {handleProps ? (
-          <button
-            type="button"
-            className={styles.grip}
-            aria-label={`Reorder ${name}`}
-            {...handleProps}
-          >
-            <span className={styles.gripDots} aria-hidden="true" />
-            {index != null && <span className={styles.order}>{index + 1}</span>}
-          </button>
-        ) : (
-          <span className={styles.grip} aria-hidden="true">
-            <span className={styles.gripDots} />
-            {index != null && <span className={styles.order}>{index + 1}</span>}
-          </span>
-        )}
-
+      <div className={styles.cardMain} {...handleProps}>
         <img
           className={styles.thumb}
           src={image}
@@ -70,14 +52,12 @@ export function CardFace({
           loading="lazy"
           onError={handleImgError(category)}
         />
-
         <div className={styles.cardBody}>
           <div className={styles.cardMeta}>
             <CategoryChip category={category} />
-            {card.time && <span className={styles.time}>{card.time}</span>}
             {pinned && (
               <span className={styles.pinBadge} title="Shows as a pin on the map">
-                📍 pinned
+                📍
               </span>
             )}
           </div>
@@ -90,7 +70,14 @@ export function CardFace({
   )
 }
 
-/** A card inside a day column: draggable, with an inline editor drawer. */
+/**
+ * One stop on the day's timeline: a time label and dot on the left rail, the
+ * card itself on the right.
+ *
+ * Only opacity and height are animated — never transform — because dnd-kit
+ * owns this element's transform while it's being dragged, and two writers on
+ * one property fight.
+ */
 export default function SortableCard({ card, poi, category, index, dropHint, actions, editor }) {
   const {
     attributes,
@@ -102,26 +89,47 @@ export default function SortableCard({ card, poi, category, index, dropHint, act
     isDragging,
   } = useSortable({ id: card.uid, data: { type: 'card', uid: card.uid } })
 
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    transition,
-    zIndex: isDragging ? 2 : undefined,
-  }
-
   return (
-    <li ref={setNodeRef} style={style} className={styles.cardSlot}>
+    <motion.li
+      ref={setNodeRef}
+      layout={false}
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.18, ease: [0.2, 0.8, 0.3, 1] }}
+      style={{
+        transform: CSS.Translate.toString(transform),
+        transition,
+        zIndex: isDragging ? 2 : undefined,
+      }}
+      className={styles.cardSlot}
+    >
+      <div className={styles.rail}>
+        <span className={styles.railTime}>{card.time || ''}</span>
+        <button
+          type="button"
+          className={styles.railDot}
+          aria-label={`Reorder ${cardTitle(card, poi)}`}
+          ref={setActivatorNodeRef}
+          {...listeners}
+          {...attributes}
+        >
+          {index + 1}
+        </button>
+      </div>
+
+      {/* listeners only — the rail dot above is the focusable activator */}
       <CardFace
         card={card}
         poi={poi}
         category={category}
-        index={index}
         dragging={isDragging}
         dropHint={dropHint}
-        handleProps={{ ...listeners, ...attributes, ref: setActivatorNodeRef }}
+        handleProps={listeners}
       >
         <div className={styles.cardActions}>{actions}</div>
         {editor}
       </CardFace>
-    </li>
+    </motion.li>
   )
 }

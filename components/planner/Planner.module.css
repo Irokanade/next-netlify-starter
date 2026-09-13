@@ -354,32 +354,6 @@
   text-align: center;
 }
 
-/* Drop indicator. Drawn as an overlay on the neighbouring card so nothing
-   in the list moves while you're aiming at it. */
-.dropBefore,
-.dropAfter {
-  position: relative;
-}
-
-.dropBefore::before,
-.dropAfter::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 4px;
-  border-radius: 999px;
-  background: var(--pastel-sage);
-  box-shadow: 0 0 0 3px rgba(184, 216, 184, 0.35);
-}
-
-.dropBefore::before {
-  top: -5px;
-}
-
-.dropAfter::after {
-  bottom: -5px;
-}
 
 .dayEmptyOver {
   border-style: solid;
@@ -431,9 +405,85 @@
 
 /* -------------------------------------------------------------- cards */
 
+/* Each stop is a row on the day's timeline: rail on the left, card on the
+   right. The rail draws its own segment of the connecting line, so the line
+   stays continuous however many cards there are. */
 .cardSlot {
   list-style: none;
   position: relative;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  overflow: hidden; /* lets the height animation collapse cleanly */
+}
+
+.rail {
+  position: relative;
+}
+
+.rail::before {
+  content: '';
+  position: absolute;
+  left: 46px;
+  top: 0;
+  bottom: -0.5rem; /* bridge the list gap into the next card's rail */
+  width: 2px;
+  background: var(--pastel-lilac);
+}
+
+/* The line starts at the first dot and stops at the last one. */
+.cardSlot:first-child .rail::before {
+  top: 26px;
+}
+.cardSlot:last-child .rail::before {
+  bottom: auto;
+  height: 26px;
+}
+.cardSlot:first-child:last-child .rail::before {
+  display: none;
+}
+
+.railTime {
+  position: absolute;
+  right: 20px;
+  top: 17px;
+  max-width: 40px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink-soft);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.railDot {
+  position: absolute;
+  left: 39px;
+  top: 18px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--card-tint, var(--pastel-lilac));
+  color: var(--ink-soft);
+  font-size: 0.6rem;
+  font-weight: 800;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: pan-y;
+  transition: transform 0.12s ease-out, background 0.12s ease-out;
+}
+
+.railDot:hover {
+  transform: scale(1.25);
+  background: var(--card-tint, var(--pastel-lilac));
+  color: var(--ink);
+}
+
+.railDot:active {
+  cursor: grabbing;
 }
 
 .card {
@@ -446,6 +496,7 @@
 
 .card:hover {
   border-color: var(--card-tint, var(--pastel-lilac));
+  box-shadow: var(--shadow-soft);
 }
 
 .cardDragging {
@@ -453,10 +504,9 @@
 }
 
 .cardOverlay {
-  width: 286px;
+  width: 272px;
   border-color: var(--card-tint, var(--pastel-lilac));
   box-shadow: var(--shadow-pop);
-  transform: rotate(-2deg) scale(1.02);
   cursor: grabbing;
 }
 
@@ -467,51 +517,15 @@
 
 .cardMain {
   display: flex;
-  align-items: stretch;
-  gap: 0.45rem;
-  padding: 0.4rem;
-}
-
-.grip {
-  display: flex;
-  background: transparent;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  width: 20px;
-  flex-shrink: 0;
-  border-radius: 8px;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.5rem;
   cursor: grab;
-  /* pan-y, not manipulation: dnd-kit's TouchSensor puts a non-passive
-     touchmove listener on window, which drops the page off the compositor
-     scroll path. Declaring pan-y lets a vertical swipe scroll the list
-     immediately; press-and-hold still starts a drag. */
   touch-action: pan-y;
-  color: var(--ink-soft);
 }
 
-.grip:active {
+.cardMain:active {
   cursor: grabbing;
-}
-
-.grip:hover {
-  background: rgba(74, 58, 82, 0.06);
-}
-
-/* Six dots — the "pick me up" affordance. */
-.gripDots {
-  width: 8px;
-  height: 14px;
-  background-image: radial-gradient(currentColor 1.1px, transparent 1.2px);
-  background-size: 4px 4px;
-  opacity: 0.55;
-}
-
-.order {
-  font-size: 0.65rem;
-  font-weight: 800;
-  line-height: 1;
 }
 
 .thumb {
@@ -538,16 +552,9 @@
   flex-wrap: wrap;
 }
 
-.time,
 .pinBadge {
-  padding: 0.1rem 0.45rem;
-  border-radius: 999px;
-  font-size: 0.66rem;
-  font-weight: 700;
-  background: #fff;
-  border: 1px solid var(--pastel-lilac);
-  color: var(--ink-soft);
-  white-space: nowrap;
+  font-size: 0.7rem;
+  line-height: 1;
 }
 
 .cardName {
@@ -564,10 +571,32 @@
   overflow-wrap: anywhere;
 }
 
+/* Actions stay out of the way until you reach for the card, so a day reads as
+   a clean list rather than three rows of buttons. */
 .cardActions {
   display: flex;
   gap: 0.2rem;
-  padding: 0 0.4rem 0.35rem 2.4rem;
+  padding: 0 0.5rem 0.4rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.16s ease-out, opacity 0.16s ease-out;
+}
+
+.card:hover .cardActions,
+.card:focus-within .cardActions {
+  max-height: 2.2rem;
+  opacity: 1;
+}
+
+/* Never hide the actions where there's no hover to reveal them with. The
+   width rule is the dependable one — `hover: none` isn't reported reliably
+   everywhere, and these are the card's only controls. */
+@media (hover: none), (pointer: coarse) {
+  .cardActions {
+    max-height: 2.2rem;
+    opacity: 1;
+  }
 }
 
 .iconBtn {
@@ -594,6 +623,33 @@
   background: var(--pastel-pink);
   border-color: var(--pastel-pink);
   color: var(--ink);
+}
+
+/* Drop indicator. Drawn as an overlay on the neighbouring card so nothing in
+   the list moves while you're aiming at it. */
+.dropBefore,
+.dropAfter {
+  position: relative;
+}
+
+.dropBefore::before,
+.dropAfter::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--pastel-sage);
+  box-shadow: 0 0 0 3px rgba(184, 216, 184, 0.35);
+}
+
+.dropBefore::before {
+  top: -5px;
+}
+
+.dropAfter::after {
+  bottom: -5px;
 }
 
 /* ------------------------------------------------------------- editor */
@@ -652,20 +708,7 @@
   gap: 0.4rem;
 }
 
-.check {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: var(--ink);
-  cursor: pointer;
-}
 
-.hint {
-  font-size: 0.68rem;
-  color: var(--ink-soft);
-}
 
 .moveRow {
   display: flex;
@@ -741,6 +784,11 @@
     width: 100%;
     align-self: stretch;
     min-height: 88px;
+  }
+
+  .cardActions {
+    max-height: 2.2rem;
+    opacity: 1;
   }
 
   /* Title and stat get their own full-width rows; the four buttons share one
