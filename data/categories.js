@@ -63,6 +63,34 @@ const categories = [
     glyph:
       '<path d="M9 6a3 3 0 0 1 6 0v1h4l1 14H4L5 7h4V6zm2 0v1h2V6a1 1 0 0 0-2 0zM8 10v2h2v-2H8zm6 0v2h2v-2h-2z"/>',
   },
+  {
+    id: 'groceries',
+    label: 'Groceries',
+    color: '#c9e7e4',
+    glyph:
+      '<path d="M2 4h3l1 2h15l-3 9H8L6 6H2V4zm5 12h12v2H7v-2zm2 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>',
+  },
+  {
+    id: 'market',
+    label: 'Farmers Markets',
+    color: '#f3d5a5',
+    glyph:
+      '<path d="M2 3h20l1 5a3 3 0 0 1-5 2 3 3 0 0 1-5 0 3 3 0 0 1-5 0 3 3 0 0 1-5-2l-1-5zm2 8.5V21h6v-6h4v6h6v-9.5a4.5 4.5 0 0 1-4-1 4.5 4.5 0 0 1-4 0 4.5 4.5 0 0 1-4 0 4.5 4.5 0 0 1-4 1z"/>',
+  },
+  {
+    id: 'drinks',
+    label: 'Boba & Tea',
+    color: '#d9c2e9',
+    glyph:
+      '<path d="M13.8 2.2l2 .7-1 2.8h4.4l-1.5 15a2 2 0 0 1-2 1.8H8.3a2 2 0 0 1-2-1.8L4.8 5.7h7.3l1.7-3.5z"/>',
+  },
+  {
+    id: 'sports',
+    label: 'Sports & Rec',
+    color: '#f6c8c8',
+    glyph:
+      '<path d="M4 9h2v6H4V9zm3-2h2v10H7V7zm3 4h4v2h-4v-2zm5-4h2v10h-2V7zm3 2h2v6h-2V9z"/>',
+  },
 ]
 
 export default categories

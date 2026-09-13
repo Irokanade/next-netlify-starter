@@ -521,7 +521,7 @@ const places = [
     id: 'the-loupe-lounge',
     name: 'The Loupe Lounge',
     category: 'eats',
-    coords: [47.6205, -122.3493],
+    coords: [47.6207, -122.3490],
     address: '400 Broad St, Seattle, WA 98109',
     image: null,
     description:
@@ -586,6 +586,761 @@ const places = [
     description:
       'Open-air mall next to UW — landscaped walkways, a good bookstore, and plenty of places to eat.',
     url: 'https://uvillage.com/',
+  },
+
+  // ========== UW TGSA 迎新手冊 (2026 orientation handbook) ==========
+  // Entries marked 'approx' below list only a neighbourhood in the handbook.
+
+  // ---------- Groceries ----------
+  {
+    id: 'uwajimaya-id',
+    name: 'Uwajimaya 宇和島屋',
+    category: 'groceries',
+    coords: [47.5971, -122.3271],
+    address: '600 5th Ave S, Seattle, WA 98104',
+    image: null,
+    description:
+      'Japanese/Chinese/Taiwanese everything — produce, fish counter, kitchenware. Husky card gets 10% off after 6pm Friday. Bookstore and food court attached.',
+    url: 'https://www.uwajimaya.com/',
+  },
+  {
+    id: 'h-mart-u-district',
+    name: 'H Mart — U District',
+    category: 'groceries',
+    coords: [47.6585, -122.3128],
+    address: '4227 University Wy NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Small Korean market right on the Ave. Meat quality is noticeably better than the chain supermarkets.',
+    url: 'https://www.hmart.com/',
+  },
+  // approx — handbook lists only 'Bellevue'; coords are best-effort
+  {
+    id: 'tt-supermarket-bellevue',
+    name: 'T&T Supermarket 大統華',
+    category: 'groceries',
+    coords: [47.5793, -122.1540],
+    address: 'Bellevue, WA',
+    image: null,
+    description:
+      'Canadian Asian chain that landed stateside in 2024 — bright, clean, stocks Taiwanese brands and even Taiwanese rice balls. App delivery if you have no car.',
+    url: 'https://www.tntsupermarket.com/',
+  },
+  {
+    id: 'trader-joes-u-district',
+    name: "Trader Joe's — U District",
+    category: 'groceries',
+    coords: [47.6614, -122.3175],
+    address: '4555 Roosevelt Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Roosevelt at 45th. Store-brand everything and the prices to match — a student staple.',
+    url: 'https://www.traderjoes.com/',
+  },
+  {
+    id: 'qfc-u-village',
+    name: 'QFC — University Village',
+    category: 'groceries',
+    coords: [47.6613, -122.2985],
+    address: '2746 NE 45th St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Closest full supermarket to campus, east side. Huge selection; grab the free QFC card for the member prices.',
+    url: 'https://www.qfc.com/',
+  },
+  {
+    id: 'safeway-u-district',
+    name: 'Safeway — U District',
+    category: 'groceries',
+    coords: [47.6640, -122.3137],
+    address: '4732 Brooklyn Ave NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Groceries and daily necessities in walking distance. The free Safeway card is worth it for the member pricing.',
+    url: 'https://www.safeway.com/',
+  },
+  {
+    id: 'whole-foods-roosevelt',
+    name: 'Whole Foods Market — Roosevelt',
+    category: 'groceries',
+    coords: [47.6755, -122.3175],
+    address: '1026 NE 64th St, Seattle, WA 98115',
+    image: null,
+    description:
+      'All-organic, pricier, and a bus or Link ride out to Roosevelt station.',
+    url: 'https://www.wholefoodsmarket.com/',
+  },
+  {
+    id: 'costco-aurora-village',
+    name: 'Costco — Aurora Village',
+    category: 'groceries',
+    coords: [47.7768, -122.3430],
+    address: '1175 N 205th St, Shoreline, WA 98133',
+    image: null,
+    description:
+      'Nearest Costco to UW. Cheapest meat anywhere if you split bulk packs and freeze them. Taiwanese imports show up sometimes.',
+    url: 'https://www.costco.com/',
+  },
+  {
+    id: 'costco-seattle-downtown',
+    name: 'Costco — Seattle Downtown',
+    category: 'groceries',
+    coords: [47.5625, -122.3295],
+    address: '4401 4th Ave S, Seattle, WA 98134',
+    image: null,
+    description:
+      'The SoDo warehouse. Gas here is cheap — ask staff to run a foreign membership card.',
+    url: 'https://www.costco.com/',
+  },
+  {
+    id: 'ranch-99-edmonds',
+    name: 'Ranch 99 北大華 — Edmonds',
+    category: 'groceries',
+    coords: [47.7905, -122.3335],
+    address: '22511 Highway 99, Edmonds, WA 98026',
+    image: null,
+    description:
+      'Chinese groceries with far more Asian vegetables than QFC or Safeway, and cheaper than Uwajimaya. 85°C bakery next door.',
+    url: 'https://www.99ranch.com/',
+  },
+  {
+    id: 'ranch-99-kent',
+    name: 'Ranch 99 南大華 — Kent',
+    category: 'groceries',
+    coords: [47.4380, -122.2560],
+    address: '18230 E Valley Hwy, Kent, WA 98032',
+    image: null,
+    description:
+      'The south-end Ranch 99. Same deal as Edmonds — worth the drive if you are stocking up.',
+    url: 'https://www.99ranch.com/',
+  },
+  {
+    id: 'asian-food-center-shoreline',
+    name: 'Asian Food Center 百佳 — Shoreline',
+    category: 'groceries',
+    coords: [47.7250, -122.3450],
+    address: '13200 Aurora Ave N, Seattle, WA 98133',
+    image: null,
+    description:
+      'Cleaner and brighter than Ranch 99, with more Taiwanese brands. Taiwanese bakery Kiki sits out front.',
+    url: 'https://www.asianfoodcenter.com/',
+  },
+  {
+    id: 'asian-food-center-bellevue',
+    name: 'Asian Food Center 百佳 — Bellevue',
+    category: 'groceries',
+    coords: [47.6290, -122.1440],
+    address: '14509 NE 20th St, Bellevue, WA 98007',
+    image: null,
+    description:
+      'Eastside branch — same Taiwanese-leaning selection.',
+    url: 'https://www.asianfoodcenter.com/',
+  },
+  {
+    id: 'tofu-101',
+    name: 'Tofu 101 豆漿店',
+    category: 'groceries',
+    coords: [47.5780, -122.1700],
+    address: '12816 Factoria Blvd SE #G, Bellevue, WA 98006',
+    image: null,
+    description:
+      'Tiny shop in Factoria Mall. Real Taiwanese soy milk Wednesday and Saturday mornings only, plus 紫米飯糰, 燒餅油條 and 油飯. Frozen dumplings the rest of the week.',
+    url: 'https://www.tofu101.com/',
+  },
+
+  // ---------- Farmers Markets ----------
+  {
+    id: 'ballard-farmers-market',
+    name: 'Ballard Farmers Market',
+    category: 'market',
+    coords: [47.6680, -122.3840],
+    address: '5345 Ballard Ave NW, Seattle, WA 98107',
+    image: null,
+    description:
+      'Sundays year-round along Ballard Ave. Local produce, seafood, mushrooms, flowers — a bit pricier than the supermarket, better quality.',
+    url: 'https://www.sfmamarkets.com/visit-ballard-farmers-market',
+  },
+  {
+    id: 'u-district-farmers-market',
+    name: 'U-District Farmers Market',
+    category: 'market',
+    coords: [47.6620, -122.3130],
+    address: 'University Way NE & NE 50th St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Saturdays on the Ave — the closest market to campus, and the easiest one to fold into a weekend walk.',
+    url: 'https://www.sfmamarkets.com/visit-university-district-farmers-market',
+  },
+  {
+    id: 'fremont-sunday-market',
+    name: 'Fremont Sunday Street Market',
+    category: 'market',
+    coords: [47.6510, -122.3500],
+    address: '3401 Evanston Ave N, Seattle, WA 98103',
+    image: null,
+    description:
+      'Part farmers market, part flea market — antiques and street food alongside the produce.',
+    url: 'https://www.fremontmarket.com/',
+  },
+
+  // ---------- Boba & Tea ----------
+  // approx — handbook lists only 'University District'; coords are best-effort
+  {
+    id: 'dont-yell-at-me',
+    name: '不要對我尖叫 Don’t Yell At Me',
+    category: 'drinks',
+    coords: [47.6570, -122.3130],
+    address: 'University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Taiwanese chain on the Ave, and the cheapest boba in the handbook’s list.',
+    url: 'https://www.instagram.com/dontyellatme_seattle/',
+  },
+  // approx — handbook lists only 'University District'; coords are best-effort
+  {
+    id: 'tp-tea-u-district',
+    name: '茶湯會 TP Tea',
+    category: 'drinks',
+    coords: [47.6565, -122.3128],
+    address: 'University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'TP Tea on the Ave — the Chun Shui Tang offshoot, so the brown-sugar and milk-foam teas are the move.',
+    url: 'https://tptea.us/',
+  },
+  {
+    id: 'happy-lemon-u-village',
+    name: 'Happy Lemon — University Village',
+    category: 'drinks',
+    coords: [47.6630, -122.2985],
+    address: '2675 NE University Village St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Salted-cheese-top teas. Also has a Bellevue Square branch.',
+    url: 'https://www.happylemonusa.com/',
+  },
+  // approx — handbook lists only 'University District'; coords are best-effort
+  {
+    id: 'yifang-u-district',
+    name: '一芳水果茶 Yifang',
+    category: 'drinks',
+    coords: [47.6605, -122.3132],
+    address: 'University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Taiwanese fruit tea done properly — the sugar-cane lemon and pineapple ones especially.',
+    url: 'https://www.yifangtea.com/',
+  },
+
+  // ---------- Sports & Rec ----------
+  {
+    id: 'uw-ima',
+    name: 'UW IMA',
+    category: 'sports',
+    coords: [47.6535, -122.3010],
+    address: '3924 Montlake Blvd NE, Seattle, WA 98195',
+    image: null,
+    description:
+      'Free with your student card: gym, pool, courts, climbing wall, tennis, golf range. A $66 Rec Class Pass adds yoga, cycling, bouldering and personal training.',
+    url: 'https://www.washington.edu/ima/',
+  },
+  {
+    id: 'uw-waterfront-activities-center',
+    name: 'UW Waterfront Activities Center',
+    category: 'sports',
+    coords: [47.6495, -122.3020],
+    address: '3710 Montlake Blvd NE, Seattle, WA 98195',
+    image: null,
+    description:
+      'Canoe and rowboat rentals in summer — paddle straight out into the Arboretum and Lake Washington.',
+    url: 'https://www.washington.edu/ima/waterfront/boat-rentals/',
+  },
+
+  // ---------- Shopping (handbook) ----------
+  {
+    id: 'rei-seattle-flagship',
+    name: 'REI Seattle Flagship',
+    category: 'shopping',
+    coords: [47.6210, -122.3320],
+    address: '222 Yale Ave N, Seattle, WA 98109',
+    image: null,
+    description:
+      'The biggest outdoor-gear selection in town, newest styles, fewest discounts. You can rent gear here instead of buying.',
+    url: 'https://www.rei.com/stores/seattle',
+  },
+  {
+    id: 'ikea-renton',
+    name: 'IKEA — Renton/Southcenter',
+    category: 'shopping',
+    coords: [47.4630, -122.2280],
+    address: '601 SW 41st St, Renton, WA 98057',
+    image: null,
+    description:
+      'Cheap flat-pack furniture south of the city. The handbook’s advice: split a van rental with friends and do it all in one trip.',
+    url: 'https://www.ikea.com/us/en/stores/renton/',
+  },
+  {
+    id: 'westfield-southcenter',
+    name: 'Westfield Southcenter',
+    category: 'shopping',
+    coords: [47.4595, -122.2580],
+    address: '2800 Southcenter Mall, Tukwila, WA 98188',
+    image: null,
+    description:
+      'The big south-end mall, right by IKEA — worth pairing the two into one trip.',
+    url: 'https://www.westfield.com/united-states/southcenter',
+  },
+  {
+    id: 'nordstrom-rack-northgate',
+    name: 'Nordstrom Rack — Northgate',
+    category: 'shopping',
+    coords: [47.7075, -122.3255],
+    address: '401 NE Northgate Way, Seattle, WA 98125',
+    image: null,
+    description:
+      'Off-season and odd-size Nordstrom stock at a steep discount — the handbook’s pick for winter coats.',
+    url: 'https://www.nordstromrack.com/',
+  },
+  {
+    id: 'target-u-district',
+    name: 'Target — U District',
+    category: 'shopping',
+    coords: [47.6617, -122.3130],
+    address: '4535 University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Household basics within walking distance. The Northgate store is much larger if you need more.',
+    url: 'https://www.target.com/',
+  },
+  {
+    id: 'crate-and-barrel-u-village',
+    name: 'Crate & Barrel — U Village',
+    category: 'shopping',
+    coords: [47.6633, -122.2980],
+    address: '2680 NE University Village St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Good furniture at a real price. CB2 is the cheaper, more modern sister label.',
+    url: 'https://www.crateandbarrel.com/',
+  },
+  {
+    id: 'pottery-barn-u-village',
+    name: 'Pottery Barn — U Village',
+    category: 'shopping',
+    coords: [47.6628, -122.2988],
+    address: '2624 NE University Village St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Well-made, traditional, expensive. West Elm downtown is the modern-styled sister store.',
+    url: 'https://www.potterybarn.com/',
+  },
+
+  // ---------- Eats (handbook) ----------
+  {
+    id: 'ellenos-yogurt-pike-place',
+    name: 'Ellenos Real Greek Yogurt',
+    category: 'eats',
+    coords: [47.6090, -122.3408],
+    address: '1500 Pike Pl, Seattle, WA 98101',
+    image: null,
+    description:
+      'Market yogurt bar — thick, tart, and the passionfruit one is the one people come back for.',
+    url: 'https://ellenos.com/',
+  },
+  // approx — handbook lists only 'International District'; coords are best-effort
+  {
+    id: 'happy-lamb-hot-pot-id',
+    name: '快樂小羊 Happy Lamb Hot Pot',
+    category: 'eats',
+    coords: [47.5985, -122.3230],
+    address: 'International District, Seattle, WA 98104',
+    image: null,
+    description:
+      'Mongolian-style hot pot — the lamb and the milky broth are the draw. Handbook’s top hot-pot pick.',
+    url: 'https://www.happylambhotpot.com/',
+  },
+  // approx — handbook lists only 'International District'; coords are best-effort
+  {
+    id: 'boiling-point-id',
+    name: '沸點 Boiling Point',
+    category: 'eats',
+    coords: [47.5978, -122.3245],
+    address: 'International District, Seattle, WA 98104',
+    image: null,
+    description:
+      'Individual hot pots, Taiwanese-style. Also has a Bellevue branch.',
+    url: 'https://bpgroupusa.com/',
+  },
+  // approx — handbook lists only 'University District'; coords are best-effort
+  {
+    id: 'yang-guo-fu-u-district',
+    name: '楊國福麻辣燙 Yang Guo Fu',
+    category: 'eats',
+    coords: [47.6590, -122.3130],
+    address: 'University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Pick-your-own-ingredients málàtàng, priced by weight. Fast, cheap, warming.',
+    url: 'https://www.yangguofu.com/',
+  },
+  {
+    id: 'capitol-cider',
+    name: 'Capitol Cider',
+    category: 'eats',
+    coords: [47.6138, -122.3210],
+    address: '818 E Pike St, Seattle, WA 98122',
+    image: null,
+    description:
+      'Long cider list and an entirely gluten-free kitchen. Live music downstairs.',
+    url: 'https://capitolcider.com/',
+  },
+  {
+    id: 'tamari-bar',
+    name: 'Tamari Bar',
+    category: 'eats',
+    coords: [47.6175, -122.3170],
+    address: '1830 12th Ave, Seattle, WA 98122',
+    image: null,
+    description:
+      'Capitol Hill izakaya — small plates, late hours, good sake list.',
+    url: 'https://www.tamaribar.com/',
+  },
+  // approx — handbook lists only 'Fremont'; coords are best-effort
+  {
+    id: 'hannyatou',
+    name: 'Hannyatou',
+    category: 'eats',
+    coords: [47.6505, -122.3495],
+    address: 'Fremont, Seattle, WA 98103',
+    image: null,
+    description:
+      'Sake-focused Fremont bar with an unusually deep by-the-glass pour list.',
+    url: 'https://www.hannyatou.com/',
+  },
+  {
+    id: 'portage-bay-cafe-roosevelt',
+    name: 'Portage Bay Cafe — Roosevelt',
+    category: 'eats',
+    coords: [47.6580, -122.3175],
+    address: '4130 Roosevelt Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'The U-District branch of the brunch institution. Pay extra for the toppings bar — that is the whole point.',
+    url: 'https://www.portagebaycafe.com/',
+  },
+  {
+    id: 'oddfellows-cafe',
+    name: 'Oddfellows Cafe + Bar',
+    category: 'eats',
+    coords: [47.6145, -122.3195],
+    address: '1525 10th Ave, Seattle, WA 98122',
+    image: null,
+    description:
+      'High-ceilinged Capitol Hill room. Handbook says get the Benedict.',
+    url: 'https://oddfellowscafe.com/',
+  },
+  {
+    id: 'toulouse-petit',
+    name: 'Toulouse Petit Kitchen & Lounge',
+    category: 'eats',
+    coords: [47.6240, -122.3565],
+    address: '601 Queen Anne Ave N, Seattle, WA 98109',
+    image: null,
+    description:
+      'New Orleans brunch in Uptown — beignets, biscuits, and a very long happy hour.',
+    url: 'https://www.toulousepetit.com/',
+  },
+  {
+    id: 'lola-seattle',
+    name: 'Lola',
+    category: 'eats',
+    coords: [47.6130, -122.3410],
+    address: '2000 4th Ave, Seattle, WA 98121',
+    image: null,
+    description:
+      'Tom Douglas’s Greek breakfast downtown — get the doughnuts with vanilla mascarpone.',
+    url: 'https://www.lolaseattle.com/',
+  },
+  // approx — handbook lists only 'Belltown'; coords are best-effort
+  {
+    id: 'la-parisienne-belltown',
+    name: 'La Parisienne',
+    category: 'eats',
+    coords: [47.6145, -122.3455],
+    address: 'Belltown, Seattle, WA 98121',
+    image: null,
+    description:
+      'French patisserie — meringues, croissants, canelés.',
+    url: 'https://www.laparisienneseattle.com/',
+  },
+  // approx — handbook lists only 'Seattle Downtown'; coords are best-effort
+  {
+    id: 'cafe-hagen-downtown',
+    name: 'Cafe Hagen',
+    category: 'eats',
+    coords: [47.6085, -122.3380],
+    address: 'Seattle Downtown, WA 98101',
+    image: null,
+    description:
+      'Scandinavian cafe — cardamom buns and a very calm room to sit in.',
+    url: 'https://www.cafehagen.com/',
+  },
+  // approx — handbook lists only 'Capitol Hill'; coords are best-effort
+  {
+    id: 'cinnaholic-capitol-hill',
+    name: 'Cinnaholic',
+    category: 'eats',
+    coords: [47.6160, -122.3190],
+    address: 'Capitol Hill, Seattle, WA 98122',
+    image: null,
+    description:
+      'Build-your-own cinnamon rolls, all vegan, frosting picked off a list.',
+    url: 'https://cinnaholic.com/',
+  },
+  // approx — handbook lists only 'Bellevue'; coords are best-effort
+  {
+    id: 'cafe-aloe-bellevue',
+    name: 'Cafe Aloe',
+    category: 'eats',
+    coords: [47.6150, -122.2015],
+    address: 'Bellevue, WA 98004',
+    image: null,
+    description:
+      'Bellevue dessert cafe — the 小豬包 piggy buns are the thing to order.',
+    url: 'https://www.instagram.com/cafealoe/',
+  },
+  // approx — handbook lists only 'Capitol Hill'; coords are best-effort
+  {
+    id: 'rondo-japanese-kitchen',
+    name: '龍堂 Rondo Japanese Kitchen',
+    category: 'eats',
+    coords: [47.6150, -122.3175],
+    address: 'Capitol Hill, Seattle, WA 98122',
+    image: null,
+    description:
+      'Capitol Hill izakaya-style kitchen, known for tonkatsu.',
+    url: 'https://www.rondoseattle.com/',
+  },
+  // approx — handbook lists only 'Capitol Hill'; coords are best-effort
+  {
+    id: 'danbo-ramen-capitol-hill',
+    name: '暖暮拉麵 Danbo Ramen',
+    category: 'eats',
+    coords: [47.6145, -122.3205],
+    address: 'Capitol Hill, Seattle, WA 98122',
+    image: null,
+    description:
+      'Hakata tonkotsu from the Fukuoka chain — thin noodles, order the firmness you want.',
+    url: 'https://www.danboramen.com/',
+  },
+  // approx — handbook lists only 'Seattle Downtown'; coords are best-effort
+  {
+    id: 'nanas-green-tea-downtown',
+    name: 'Nana’s Green Tea',
+    category: 'eats',
+    coords: [47.6110, -122.3360],
+    address: 'Seattle Downtown, WA 98101',
+    image: null,
+    description:
+      'Japanese matcha cafe. Handbook’s order: the matcha mochi parfait.',
+    url: 'https://nanasgreenteausa.com/',
+  },
+  {
+    id: 'kamonegi',
+    name: 'Kamonegi',
+    category: 'eats',
+    coords: [47.6520, -122.3420],
+    address: '1054 N 39th St, Seattle, WA 98103',
+    image: null,
+    description:
+      'Handmade soba in Fremont — the duck-and-scallion 蔥鴨蕎麥麵 is the signature.',
+    url: 'https://www.kamonegiseattle.com/',
+  },
+  {
+    id: 'sushi-kashiba',
+    name: 'Sushi Kashiba',
+    category: 'eats',
+    coords: [47.6095, -122.3420],
+    address: '86 Pine St #1, Seattle, WA 98101',
+    image: null,
+    description:
+      'Shiro Kashiba’s room by the market — a direct disciple of Jiro. Sit at the counter for omakase.',
+    url: 'https://sushikashiba.com/',
+  },
+  // approx — handbook lists only 'Bellevue'; coords are best-effort
+  {
+    id: 'looking-for-chai-bellevue',
+    name: 'Looking for Chai',
+    category: 'eats',
+    coords: [47.6140, -122.2000],
+    address: 'Bellevue, WA 98004',
+    image: null,
+    description:
+      'Taiwanese cafe in Bellevue.',
+    url: 'https://www.instagram.com/lookingforchai/',
+  },
+  // approx — handbook lists only 'Seattle (UW Ave)'; coords are best-effort
+  {
+    id: 'capsule-cafe-u-district',
+    name: 'Capsule Cafe',
+    category: 'eats',
+    coords: [47.6575, -122.3130],
+    address: 'University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      '滷肉飯, 雞排, 鹽酥雞 and 滷味 on the Ave — spend enough and you get a gachapon capsule.',
+    url: 'https://www.instagram.com/capsulecafeseattle/',
+  },
+  // approx — handbook lists only 'Bellevue Marketplace'; coords are best-effort
+  {
+    id: 'monga-cafe-bellevue',
+    name: '艋舺 Monga Cafe',
+    category: 'eats',
+    coords: [47.6165, -122.1985],
+    address: 'Bellevue Marketplace, Bellevue, WA 98007',
+    image: null,
+    description:
+      'Taiwanese comfort food in Bellevue — the 滷肉飯 is what the handbook singles out.',
+    url: 'https://www.mongacafe.com/',
+  },
+  // approx — handbook lists only 'Bellevue'; coords are best-effort
+  {
+    id: 'hardwork-cafe-bellevue',
+    name: '路邊小棧 HardWork Café',
+    category: 'eats',
+    coords: [47.6135, -122.1975],
+    address: 'Bellevue, WA 98007',
+    image: null,
+    description:
+      'Taiwanese street-food menu — málàtàng and 銀絲卷.',
+    url: 'https://www.instagram.com/hardworkcafe/',
+  },
+  // approx — handbook lists only 'Fremont'; coords are best-effort
+  {
+    id: '19-gold-fremont',
+    name: '十九金 19 Gold',
+    category: 'eats',
+    coords: [47.6515, -122.3505],
+    address: 'Fremont, Seattle, WA 98103',
+    image: null,
+    description:
+      'Taiwanese spot in Fremont.',
+    url: 'https://www.instagram.com/19goldseattle/',
+  },
+  {
+    id: 'din-tai-fung-u-village',
+    name: '鼎泰豐 Din Tai Fung — U Village',
+    category: 'eats',
+    coords: [47.6635, -122.2975],
+    address: '2621 NE 46th St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Xiaolongbao done to the usual standard, ten minutes from campus. Also in Bellevue. Expect a wait.',
+    url: 'https://www.dintaifungusa.com/',
+  },
+  // approx — handbook lists only 'University District'; coords are best-effort
+  {
+    id: 'kong-tofu-house',
+    name: 'Kong Tofu & BBQ',
+    category: 'eats',
+    coords: [47.6588, -122.3130],
+    address: 'University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Soondubu on the Ave — bubbling tofu stew, cheap and filling in the rain.',
+    url: 'https://www.kongtofuseattle.com/',
+  },
+  // approx — handbook lists only 'Uptown'; coords are best-effort
+  {
+    id: 'paju-uptown',
+    name: 'Paju',
+    category: 'eats',
+    coords: [47.6245, -122.3560],
+    address: 'Uptown, Seattle, WA 98109',
+    image: null,
+    description:
+      'Modern Korean in Uptown. Handbook calls out the squid-ink fried rice and the octopus.',
+    url: 'https://www.pajuseattle.com/',
+  },
+  {
+    id: 'jade-garden-id',
+    name: '翠苑 Jade Garden',
+    category: 'eats',
+    coords: [47.5975, -122.3235],
+    address: '424 7th Ave S, Seattle, WA 98104',
+    image: null,
+    description:
+      'Cart dim sum in the ID — one of The New York Times’s 25 best restaurants in Seattle.',
+    url: 'https://www.jadegardenseattle.com/',
+  },
+  // approx — handbook lists only 'International District'; coords are best-effort
+  {
+    id: 'hong-kong-bistro-id',
+    name: '美味來 Hong Kong Bistro',
+    category: 'eats',
+    coords: [47.5982, -122.3238],
+    address: 'International District, Seattle, WA 98104',
+    image: null,
+    description:
+      'HK cafe food — the 菠蘿油 pineapple bun with butter is the handbook’s pick.',
+    url: 'https://www.hongkongbistroseattle.com/',
+  },
+  {
+    id: 'arayas-place',
+    name: 'Araya’s Place',
+    category: 'eats',
+    coords: [47.6680, -122.3130],
+    address: '5240 University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'All-vegan Thai on the north end of the Ave — long-running U-District favourite.',
+    url: 'https://arayasplace.com/',
+  },
+  // approx — handbook lists only 'University District'; coords are best-effort
+  {
+    id: 'ate-o-clock',
+    name: 'Ate O’Clock',
+    category: 'eats',
+    coords: [47.6605, -122.3130],
+    address: 'University District, Seattle, WA 98105',
+    image: null,
+    description:
+      'Cheap Thai on the Ave, portions sized for students.',
+    url: 'https://www.ateoclockseattle.com/',
+  },
+  // approx — handbook lists only 'University District'; coords are best-effort
+  {
+    id: 'thai-tom',
+    name: 'Thai Tom',
+    category: 'eats',
+    coords: [47.6617, -122.3128],
+    address: '4543 University Way NE, Seattle, WA 98105',
+    image: null,
+    description:
+      'Tiny counter, open wok, real heat. Cash-friendly and permanently packed.',
+    url: 'https://www.thaitomseattle.com/',
+  },
+  {
+    id: 'serious-pie-downtown',
+    name: 'Serious Pie',
+    category: 'eats',
+    coords: [47.6135, -122.3420],
+    address: '2001 4th Ave, Seattle, WA 98121',
+    image: null,
+    description:
+      'Blistered, chewy-crust pizza from Tom Douglas. Listed in the handbook as ‘Serious Pizza’.',
+    url: 'https://www.seriouspieseattle.com/',
+  },
+  {
+    id: 'delfinos-chicago-pizza',
+    name: 'Delfino’s Chicago Pizza',
+    category: 'eats',
+    coords: [47.6630, -122.2982],
+    address: '2631 NE University Village St, Seattle, WA 98105',
+    image: null,
+    description:
+      'Deep-dish at U Village. Order well ahead — it takes 45 minutes to bake.',
+    url: 'https://www.delfinospizza.com/',
   },
 ]
 
