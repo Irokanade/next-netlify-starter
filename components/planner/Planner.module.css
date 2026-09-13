@@ -156,7 +156,11 @@
   flex: 1;
   min-width: 0;
   cursor: grab;
-  touch-action: manipulation;
+  /* pan-y, not manipulation: dnd-kit's TouchSensor puts a non-passive
+     touchmove listener on window, which drops the page off the compositor
+     scroll path. Declaring pan-y lets a vertical swipe scroll the list
+     immediately; press-and-hold still starts a drag. */
+  touch-action: pan-y;
   text-align: left;
   border-radius: 12px;
 }
@@ -479,7 +483,11 @@
   flex-shrink: 0;
   border-radius: 8px;
   cursor: grab;
-  touch-action: manipulation;
+  /* pan-y, not manipulation: dnd-kit's TouchSensor puts a non-passive
+     touchmove listener on window, which drops the page off the compositor
+     scroll path. Declaring pan-y lets a vertical swipe scroll the list
+     immediately; press-and-hold still starts a drag. */
+  touch-action: pan-y;
   color: var(--ink-soft);
 }
 
@@ -704,14 +712,54 @@
   .palette {
     /* Single column here — pinning it would park the list on top of the board. */
     position: static;
-    max-height: 42vh;
+    /* No cap on the panel: the header, search, filter chips and day picker ate
+       the whole 42vh and left the list at 0px, so it had nothing to scroll.
+       The list owns the limit now, so it always gets a real scroll area. */
+    max-height: none;
+  }
+  .paletteList {
+    max-height: 45vh;
+    min-height: 160px;
+  }
+
+  /* Days stack top-to-bottom instead of scrolling sideways. */
+  .board {
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: visible;
   }
   .day {
-    flex-basis: 82vw;
+    flex: 0 0 auto;
+    width: 100%;
     max-height: none;
   }
   .cardList {
     overflow-y: visible;
+  }
+  .addDayColumn {
+    flex: 0 0 auto;
+    width: 100%;
+    align-self: stretch;
+    min-height: 88px;
+  }
+
+  /* Title and stat get their own full-width rows; the four buttons share one
+     even row instead of wrapping raggedly around the flex spacer. */
+  .toolbarSpacer {
+    display: none;
+  }
+  .tripTitle {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+  .tripStat {
+    flex: 1 1 100%;
+    padding: 0 0.5rem;
+  }
+  .toolBtn {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 0.45rem 0.5rem;
   }
 }
 
