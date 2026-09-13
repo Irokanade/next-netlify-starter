@@ -81,13 +81,15 @@ export default function SeattleMap({
       scrollWheelZoom
       style={{ height: '100%', width: '100%' }}
     >
-      {/* Plain OSM tiles: CARTO now burns an "API KEY REQUIRED" watermark into
-          unkeyed tiles. These run a little louder than the pastel palette, so
-          .leaflet-tile-pane softens them in globals.css. */}
+      {/* Esri's CDN, measured at ~200ms/tile against openstreetmap.org's
+          ~700ms. Note the {z}/{y}/{x} order — Esri puts row before column.
+          updateWhenZooming keeps it from firing a request storm mid-animation. */}
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, DeLorme, NAVTEQ, USGS'
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
         maxZoom={19}
+        updateWhenZooming={false}
+        keepBuffer={2}
       />
       {places.map((p) => {
         const category = categoryMap[p.category]

@@ -111,11 +111,8 @@ img {
   background: var(--pastel-sky);
   font-family: inherit;
 }
-/* Pull the raw OSM tiles back toward the pastel palette. Applied to the tile
-   pane only, so pins, popups and controls keep their real colours. */
-.leaflet-tile-pane {
-  filter: saturate(0.68) brightness(1.06) contrast(0.94);
-}
+/* Esri's street basemap is already muted enough for the pastel palette, so no
+   filter here — a filter on the tile pane repaints every tile on each pan. */
 .leaflet-control-attribution {
   background: rgba(255, 247, 236, 0.85) !important;
   color: var(--ink-soft) !important;
